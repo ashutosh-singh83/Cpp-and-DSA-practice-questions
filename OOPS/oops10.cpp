@@ -1,0 +1,2 @@
+//friend function
+#include
