@@ -30,7 +30,7 @@ int evalInfix(string &s)
 {
     stack<int> nums;
     stack<char> ops;
-    for (int i = 0; i < s.size() - 1; i++)
+    for (int i = 0; i < s.size(); i++)
     {
 
         if (isdigit(s[i]))
