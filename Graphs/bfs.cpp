@@ -5,10 +5,8 @@
 #include <climits>
 #include <queue>
 using namespace std;
-int v;
+
 vector<list<int>> graph;
-unordered_set<int> visited;
-vector<vector<int>> result;
 void addEdge(int src, int dest, bool bi_dir)
 {
     graph[src].push_back(dest);
@@ -17,18 +15,17 @@ void addEdge(int src, int dest, bool bi_dir)
         graph[dest].push_back(src);
     }
 }
-void bfs(int src, vector<int> &dist)
+vector<int> bfs(int src)
 {
     queue<int> qu;
-    visited.clear();
+    unordered_set<int> visited;
     visited.insert(src);
     qu.push(src);
-    dist.resize(v, INT_MAX);
-    dist[src] = 0;
+    vector<int> bfsArray;
     while (!qu.empty())
     {
         int curr = qu.front();
-        cout << curr << " ";
+        bfsArray.push_back(curr);
         qu.pop();
         for (auto neighbour : graph[curr])
         {
@@ -36,22 +33,19 @@ void bfs(int src, vector<int> &dist)
             {
                 qu.push(neighbour);
                 visited.insert(neighbour);
-                dist[neighbour] = dist[curr] + 1;
             }
         }
     }
-    cout << "\n";
+    return bfsArray;
 }
-
 int main()
 {
-
+    int v;
     cin >> v;
-    graph.resize(v, list<int>());
-    int e;
 
+    graph.resize(v, list<int>()); // 0 based indexed graph. If we want 1 based then size will be v+1 and graph[0]={}
+    int e;
     cin >> e;
-    visited.clear();
 
     for (int i = 0; i < e; i++)
     {
@@ -59,11 +53,12 @@ int main()
         cin >> u >> v;
         addEdge(u, v, 1);
     }
-    vector<int> dist;
-    bfs(0, dist);
-    for (int i = 0; i < dist.size(); i++)
+
+    vector<int> bfsArray = bfs(0);
+    for (int i = 0; i < bfsArray.size(); i++)
     {
-        cout << dist[i] << " ";
+        cout << bfsArray[i] << " ";
     }
+    cout << endl;
     return 0;
 }
