@@ -53,7 +53,7 @@ Node*reverseKnodesRecursive(Node*&head,int k){
     }
     //currptr will give us (k+1)th node  
     if(currptr!=NULL){
-        Node*new_head=reverseKnodesRecursive(currptr,k);//recursive cal
+        Node*new_head=reverseKnodesRecursive(currptr,k);//recursive call
         head->next=new_head;
     }
     return prevptr;//prevptr will give the new head of connected LL
